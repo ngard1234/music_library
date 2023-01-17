@@ -1,16 +1,54 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import Gallery from './components/Gallery'
 import SearchBar from './components/SearchBar'
-
+import { createResource as fetchData } from './helper'
+import Spinner from './Spinner'
 
 
 const App = () => {
-  let [search, setSearch] = useState('')
+  let [searchTerm, setSearchTerm] = useState('')
   let [message, setMessage] = useState('Search for Music!')
-  let [data, setData] = useState([])
+  let [data, setData] = useState(null)
 
-  const API_URL = 'https://itunes.apple.com/search?term='
+  const handleSearch = (e, term) => {
+    e.preventDefault()
+    setSearchTerm(term)
+}
 
+ // const API_URL = 'https://itunes.apple.com/search?term='
+  useEffect(() => {
+    if (searchTerm) {
+        setData(fetchData(searchTerm))
+    }
+}, [searchTerm]);
+
+
+const renderGallery = () => {
+    if(data){
+        return (
+            <Suspense fallback={<Spinner />} >
+                <Gallery data={data} />
+            </Suspense>
+        )
+    }
+}
+
+return (
+    <div className="App">
+        <SearchBar handleSearch={handleSearch} />
+        {message}
+        {/* <Suspense fallback={<h1>Loading...</h1>}> */}
+             {/* <Gallery data={data} /> */}
+        {/* </Suspense> */}
+        {renderGallery()}
+    </div>
+);
+
+}
+
+
+
+/*
   useEffect(() => {
       if(search) {
           const fetchData = async () => {
@@ -26,19 +64,17 @@ const App = () => {
           fetchData()
       }
   }, [search])
+  */
 
-  const handleSearch = (e, term) => {
-      e.preventDefault()
-      setSearch(term)
-  }
-
+  
+/*
   return (
       <div>
           <SearchBar handleSearch={handleSearch} />
           {message}
-          <Gallery data={data} />
+          <Gallery data={data} /> //Gallery is commented out to allow app to run we won't see data displayed on the screen, but we will be able to inspect our DevTools to see what data is storing now!
       </div>
   )
 }
-
+*/
 export default App
