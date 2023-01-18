@@ -1,16 +1,31 @@
-import GalleryItem from './GalleryItem'
+import GalleryItem from "./GalleryItem";
+import { useContext } from "react";
+import {DataContext} from '../context/DataContext'
 
-function Gallery(props){
 
-    const display = props.data.map((item, index) => {
-        return (
+ function Gallery() {
+    const data = useContext(DataContext)
+    const myData = data.result.read()
+
+    const display = myData.map((item, index) => {
+        return(
             <GalleryItem item={item} key={index} />
         )
-    })
+    });
+
+
+// const Gallery = (props) => {
+//     const data = props.data.result.read()
+
+//     const display = data.map((item, index) => {
+//         return (
+//             <GalleryItem item={item} key={index} />
+//         )
+//     })
 
     return (
         <div>
-        {display}
+            {display}
         </div>
     )
 }
