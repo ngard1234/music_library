@@ -3,7 +3,7 @@ import SearchBar from './components/SearchBar';
 import AlbumView from './components/AlbumView';
 import ArtistView from './components/ArtistView';
 import { useRef, useState, Suspense } from 'react';
-import { BrowserRouter as Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import {DataContext} from './context/DataContext'
 import { SearchContext } from './context/SearchContext';
 import './App.css'
@@ -40,7 +40,7 @@ let [data, setData] = useState(null)
       {'Search For Music'}
       
       
-        <Routes>
+        <Router>
             <Route exact path={'/'}>
                 <SearchContext.Provider value={{term: searchInput, handleSearch: handleSearch}}>
                 <SearchBar/>
@@ -48,7 +48,7 @@ let [data, setData] = useState(null)
             </Route >
             <Route exact path={'/'}>      
                 <DataContext.Provider value={data}>
-                {renderGallery}
+                {renderGallery()}
                 </DataContext.Provider>                
             </Route>
             
@@ -58,7 +58,7 @@ let [data, setData] = useState(null)
             <Route path='/artist/:id'>
               <ArtistView/>
             </Route>
-        </Routes>
+        </Router>
     
       
     </div>

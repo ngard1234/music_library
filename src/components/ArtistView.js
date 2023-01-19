@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link, useNavigate} from 'react-router-dom'
+import { useParams, Link, useHistory} from 'react-router-dom'
 import Spinner from '../Spinner'
 
 function ArtistView() {
-    const navigate = useNavigate()
+    const navigate = useHistory()
     const { id } = useParams()
     const [ artistData, setArtistData ] = useState([])
     

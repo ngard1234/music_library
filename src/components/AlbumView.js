@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import Spinner from '../Spinner'
 
 function AlbumView() {
-    const navigate = useNavigate()
+    const navigate = useHistory()
     const { id } = useParams()
     const [ albumData, setAlbumData ] = useState([])
 
