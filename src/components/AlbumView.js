@@ -3,7 +3,9 @@ import { useParams, useHistory } from 'react-router-dom'
 import Spinner from '../Spinner'
 
 function AlbumView() {
-    const navigate = useHistory()
+    //history object, we can access and manipulate the current state of the browser history.
+    //React Router v6 to replace the useHistory() wit useNavigate().
+    const history = useHistory() 
     const { id } = useParams()
     const [ albumData, setAlbumData ] = useState([])
 

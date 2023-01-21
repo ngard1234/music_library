@@ -25,7 +25,7 @@ const wrapPromise = (promise) => {
     })
 
     // finally, we should plan to return an object that emits
-    // a different response depending on our status:
+    // a dif ferent response depending on our status:
     return {
         read() {
             // if the promise hasn't triggered, run it!
